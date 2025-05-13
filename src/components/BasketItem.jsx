@@ -1,0 +1,19 @@
+function BasketItem(props) {
+    const {
+        mainId,
+        displayName,
+        price: { finalPrice },
+        quantity,
+    } = props
+
+    return (
+        <li className="collection-item">
+            {displayName} x{quantity} = {finalPrice}
+            <span className="secondary-content">
+                <i className="material-icons basket-delete">close</i>
+            </span>
+        </li>
+    )
+}
+
+export { BasketItem }

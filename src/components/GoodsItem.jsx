@@ -34,7 +34,7 @@ function GoodsItem(props) {
                 <p>{displayDescription}</p>
             </div>
             <div className="card-action">
-                <button className="btn" onClick={() => addToBasket({ mainId, displayName, finalPrice })}>Купить</button>
+                <button className="btn" onClick={() => addToBasket({ mainId, displayName, price: { finalPrice } })}>Купить</button>
                 <span className="right" style={{fontSize: '1.8rem'}}>{finalPrice} руб.</span>
             </div>
         </div>
