@@ -61,6 +61,8 @@ nav {
 
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+
+  animation: show 500ms ease-in-out;
 }
 
 
@@ -74,4 +76,14 @@ nav {
 
 .basket-delete {
   cursor: pointer;
+}
+
+@keyframes show {
+  from {
+    top: 70%;
+    opacity: 0;
+  } to {
+    top: 50%;
+    opacity: 1;
+  }
 }
