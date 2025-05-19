@@ -5,14 +5,17 @@ import { Preloader } from "./Preloader";
 import { GoodsList } from "./GoodsList";
 import { Cart } from "./Cart";
 import { BasketList } from "./BasketList";
+import { Alert } from "./Alert"
 
 function Shop() {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
     const [isBasketShow, setBasketShow] = useState(false);
+    const [alertName, setAlertName] = useState('');
 
     const addToBasket = (item) => {
+        console.log('Добавлен в корзину:', item); // <-- сюда
         const itemIndex = order.findIndex(orderItem => orderItem.mainId === item.mainId)
 
         if (itemIndex < 0) {
@@ -35,7 +38,8 @@ function Shop() {
 
             setOrder(newOrder)
         }
-    }
+        setAlertName(item.displayName);
+    };
 
     const removeFromBasket = (itemId) => {
         const newOrder = order.filter((el) => el.mainId !== itemId);
@@ -44,7 +48,7 @@ function Shop() {
 
     const incQuantity = (itemId) => {
         const newOrder = order.map(el => {
-            if (el.mainId  === itemId) {
+            if (el.mainId === itemId) {
                 const newQuantity = el.quantity + 1;
                 return {
                     ...el,
@@ -59,7 +63,7 @@ function Shop() {
 
     const decQuantity = (itemId) => {
         const newOrder = order.map(el => {
-            if (el.mainId  === itemId) {
+            if (el.mainId === itemId) {
                 const newQuantity = el.quantity - 1;
                 return {
                     ...el,
@@ -74,6 +78,10 @@ function Shop() {
 
     const handleBasketShow = () => {
         setBasketShow(!isBasketShow);
+    }
+
+    const closeAlert = () => {
+        setAlertName('');
     }
 
     useEffect(function getGoods() {
@@ -105,6 +113,9 @@ function Shop() {
                     decQuantity={decQuantity}
                 />
             )
+        }
+        {
+            alertName && <Alert name={alertName} closeAlert={closeAlert} />
         }
     </main>
 }
